@@ -24,7 +24,11 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
+        with:
+          ref: 'main'
+      - uses: actions/checkout@v3
+        with:
+          ref: 'zh_cn'
       # Runs a single command using the runners shell
       - name: show dir
         run: ls
