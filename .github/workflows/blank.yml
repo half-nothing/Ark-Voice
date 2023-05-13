@@ -36,4 +36,4 @@ jobs:
       # Runs a single command using the runners shell
       - name: deal zh_cn
         run: |
-          zip -r ../release/zh_cn.zip .
+          zip -r ../release/zh_cn.zip . -x "./.git/*"
