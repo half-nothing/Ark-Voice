@@ -73,6 +73,7 @@ jobs:
         run: |
           zip -r ../release/other.zip . -x "./.git/*"
           cd ../release
+          ls
           
       - name: Create timestamp
         id: create_timestamp
