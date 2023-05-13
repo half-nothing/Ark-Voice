@@ -29,10 +29,11 @@ jobs:
       - name: deal main
         run: |
           mkdir ../release
-          mv model_data.json ../release/
+          mv models_data.json ../release/
       - uses: actions/checkout@v3
         with:
           ref: 'zh_cn'
       # Runs a single command using the runners shell
-      - name: show dir
-        run: ls
+      - name: deal zh_cn
+        run: |
+          zip -r ../release/zh_cn.zip .
