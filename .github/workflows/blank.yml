@@ -37,3 +37,105 @@ jobs:
       - name: deal zh_cn
         run: |
           zip -r ../release/zh_cn.zip . -x "./.git/*"
+          
+      - uses: actions/checkout@v3
+        with:
+          ref: 'en_us'
+      - name: deal en_us
+        run: |
+          zip -r ../release/en_us.zip . -x "./.git/*"
+          
+      - uses: actions/checkout@v3
+        with:
+          ref: 'ko_kr'
+      - name: deal ko_kr
+        run: |
+          zip -r ../release/ko_kr.zip . -x "./.git/*"
+          
+      - uses: actions/checkout@v3
+        with:
+          ref: 'ja_jp'
+      - name: deal ja_jp
+        run: |
+          zip -r ../release/ja_jp.zip . -x "./.git/*"
+              
+      - uses: actions/checkout@v3
+        with:
+          ref: 'other'
+      - name: deal other
+        run: |
+          zip -r ../release/other.zip . -x "./.git/*"
+          cd ../release
+      
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: Github Workflow 自动打包
+          draft: false
+          prerelease: false
+        
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./zh_cn.zip
+          asset_name: zh_cn.zip
+          asset_content_type: application/zip
+                  
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./en_us.zip
+          asset_name: en_us.zip
+          asset_content_type: application/zip
+                  
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./ja_jp.zip
+          asset_name: ja_jp.zip
+          asset_content_type: application/zip
+                  
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./ko_kr.zip
+          asset_name: ko_kr.zip
+          asset_content_type: application/zip
+                  
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./other.zip
+          asset_name: other.zip
+          asset_content_type: application/zip
+        
+                          
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./models_data.json
+          asset_name: models_data.json
+          asset_content_type: application/json
