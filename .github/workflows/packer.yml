@@ -31,49 +31,9 @@ jobs:
         run: |
           mkdir ../release
           mv models_data.json ../release/
-          
-      - uses: actions/checkout@v3
-        with:
-          ref: 'zh_cn'
-          
-      # Runs a single command using the runners shell
-      - name: deal zh_cn
-        run: |
-          zip -r ../release/zh_cn.zip . -x "./.git/*"
-          
-      - uses: actions/checkout@v3
-        with:
-          ref: 'en_us'
-          
-      - name: deal en_us
-        run: |
-          zip -r ../release/en_us.zip . -x "./.git/*"
-          
-      - uses: actions/checkout@v3
-        with:
-          ref: 'ko_kr'
-          
-      - name: deal ko_kr
-        run: |
-          zip -r ../release/ko_kr.zip . -x "./.git/*"
-          
-      - uses: actions/checkout@v3
-        with:
-          ref: 'ja_jp'
-          
-      - name: deal ja_jp
-        run: |
-          zip -r ../release/ja_jp.zip . -x "./.git/*"
-              
-      - uses: actions/checkout@v3
-        with:
-          ref: 'other'
-          
-      - name: deal other
-        run: |
-          zip -r ../release/other.zip . -x "./.git/*"
           cd ../release
           ls
+          pwd
           
       - name: Create timestamp
         id: create_timestamp
